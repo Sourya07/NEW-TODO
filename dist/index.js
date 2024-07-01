@@ -11,16 +11,52 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 const client_1 = require("@prisma/client");
 const prisma = new client_1.PrismaClient();
-function insertUser(username, password, name) {
+function CrearingUser(userId, title, description) {
     return __awaiter(this, void 0, void 0, function* () {
-        const res = yield prisma.user.create({
+        const todo = yield prisma.todo.create({
             data: {
-                username,
-                password,
-                name
-            }
+                title,
+                description,
+                userId
+            },
         });
-        console.log(res);
+        console.log(todo);
     });
 }
-insertUser("admin2", "123456", "harkirat");
+CrearingUser(1, "priyanshu", "hello there");
+// import { PrismaClient } from "@prisma/client";
+// const prisma = new PrismaClient();
+// async function getTodosAndUserDetails(userId: number, ) {
+//     const todos = await prisma.todo.findMany({
+//         where: {
+//             userId: userId,
+//         },
+//         select: {
+//             user: true,
+//             title: true,
+//             description: true
+//         }
+//     });
+//     console.log(todos);
+// }
+// getTodosAndUserDetails(1);
+// async function getUser(id: number) {
+//   const user = await prisma.user.findFirst({
+//     where: {
+//        id : id
+//     }
+//   })
+//   console.log(user);
+// }
+// getUser(12);
+// async function insertUser(username: string, password: string,  name: string) {
+//   const res = await prisma.user.create({
+//     data: {
+//         username,
+//         password,
+//         name
+//     }
+//   })
+//   console.log(res);
+// }
+// insertUser("admin2", "123456", "priyanshu")
