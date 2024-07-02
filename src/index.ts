@@ -16,36 +16,33 @@ async function CrearingUser(userId: number, title: string, description: string) 
 
 CrearingUser(1, "priyanshu", "hello there")
 
-// import { PrismaClient } from "@prisma/client";
 
-// const prisma = new PrismaClient();
+async function getTodosAndUserDetails(userId: number, ) {
+    const todos = await prisma.todo.findMany({
+        where: {
+            userId: userId,
+        },
+        select: {
+            user: true,
+            title: true,
+            description: true
+        }
+    });
+    console.log(todos);
+}
 
-// async function getTodosAndUserDetails(userId: number, ) {
-//     const todos = await prisma.todo.findMany({
-//         where: {
-//             userId: userId,
-//         },
-//         select: {
-//             user: true,
-//             title: true,
-//             description: true
-//         }
-//     });
-//     console.log(todos);
-// }
+getTodosAndUserDetails(1);
 
-// getTodosAndUserDetails(1);
+async function getUser(id: number) {
+  const user = await prisma.user.findFirst({
+    where: {
+       id : id
+    }
+  })
+  console.log(user);
+}
 
-// async function getUser(id: number) {
-//   const user = await prisma.user.findFirst({
-//     where: {
-//        id : id
-//     }
-//   })
-//   console.log(user);
-// }
-
-// getUser(12);
+getUser(1);
 
 // async function insertUser(username: string, password: string,  name: string) {
 //   const res = await prisma.user.create({
